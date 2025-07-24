@@ -63,4 +63,21 @@ Desktop.ini
 # Optional: Ignore database files (if any local dump)
 *.sqlite
 *.db
-*.sql
+
+#terraform:
+
+terraform/.terraform/
+terraform/.frontend/.terraform
+
+
+
+
+.terraform/
+.terraform/
+.terraform/
+.terraform/
+.terraform/
+terraform/.terraform
+terraform/front-end-infra/.terraform
+terraform/.terraform
+terraform/front-end-infra/.terraform
