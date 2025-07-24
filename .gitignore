@@ -81,3 +81,5 @@ terraform/.terraform
 terraform/front-end-infra/.terraform
 terraform/.terraform
 terraform/front-end-infra/.terraform
+terraform/front-end-infra/terraform.tfstate
+terraform/front-end-infra/terraform.tfstate.backup
