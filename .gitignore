@@ -12,7 +12,7 @@ package-lock.json
 # Logs
 logs/
 *.log
-.log.*
+*.log.*
 
 # Build output
 dist/
@@ -41,4 +41,50 @@ backend/.eslintcache
 
 # Docker
 *.local
-docker-compo
+docker-compose.override.yml
+
+# VS Code
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Linux system files
+*.swp
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# GitHub Actions
+.github/workflows/*.secret
+
+# Optional: Ignore database files (if any local dump)
+*.sqlite
+*.db
+
+#terraform:
+
+terraform/.terraform/
+terraform/.frontend/.terraform
+
+
+
+
+.terraform/
+.terraform/
+.terraform/
+.terraform/
+.terraform/
+terraform/.terraform
+terraform/front-end-infra/.terraform
+terraform/.terraform
+terraform/front-end-infra/.terraform
+terraform/front-end-infra/terraform.tfstate
+terraform/front-end-infra/terraform.tfstate.backup
+terraform/front-end-infra/terraform.tfstate
+terraform/front-end-infra/terraform.tfstate.backup
+terraform/*.tfstate
+terraform/*.tfstate.backup
+*.tfstate*
