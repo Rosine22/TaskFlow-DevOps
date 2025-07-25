@@ -14,7 +14,7 @@ Here are screenshots of my deployed Azure resource:
 
 ## A link to the Pull Request you reviewed for your peer
 
-[link text]()
+[link text](https://github.com/Rosine22/TaskFlow-DevOps/pull/16/)
 
 ## A brief reflection on the challenges of IaC and the manual deployment process
 
