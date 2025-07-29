@@ -8,7 +8,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.eslint.json',
+        project: './tsconfig.eslint.json',  // points to the ESLint-specific tsconfig
         sourceType: 'module',
       },
     },
@@ -17,8 +17,9 @@ export default [
       react: reactPlugin,
     },
     rules: {
+      // Customize your rules here
       '@typescript-eslint/no-unused-vars': 'warn',
-      'react/react-in-jsx-scope': 'off',
+      'react/react-in-jsx-scope': 'off',  // Not needed with React 17+
     },
   },
 ];
