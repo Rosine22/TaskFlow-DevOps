@@ -30,5 +30,5 @@ Here are screenshots of my deployed Azure resource:
   - How to properly structure and troubleshoot Terraform scripts.
   - The importance of correct syntax and export handling in Node.js modules.
   - The benefits of Docker for consistent environments and easier debugging.
-  - How multi-stage Docker builds create efficient images.
+  - How multi-stage Docker builds create good images.
   - Why testing incrementally avoids bigger problems later.
