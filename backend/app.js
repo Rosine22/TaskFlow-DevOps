@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
+import logger from './logger';
+logger.info('App started');
 
 const app = express();
 app.use(cors());
