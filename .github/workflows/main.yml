@@ -37,12 +37,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run npm audit
-        run: cd backend && npm audit --audit-level=moderate || true
+        run: npm audit --audit-level=moderate || true
 
       - name: Trivy image scan
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/rosine22/taskflow-backend:latest
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
   docker-build-push:
     needs: security-scanning
@@ -71,5 +76,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to Azure App Service using Azure CLI
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy using deploy.sh
         run: bash ./scripts/deploy.sh
