@@ -84,7 +84,7 @@ export default function Dashboard() {
         {loading ? 'Processing...' : 'Add Task'}
       </button>
 
-      {loading && !tasks.length && <p>Loading tasks Now...</p>}
+      {loading && !tasks.length && <p>Loading tasks now...</p>}
 
       <ul>
         {tasks.map((task) => (
