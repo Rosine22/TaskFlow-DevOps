@@ -36,10 +36,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate || true
-
-      - name: Trivy image scan
+      - name: Install Trivy
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/rosine22/taskflow-backend:latest
@@ -48,6 +45,11 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+
+      - name: Run npm audit
+        run: |
+          cd backend
+          npm audit --audit-level=moderate || true
 
   docker-build-push:
     needs: security-scanning
