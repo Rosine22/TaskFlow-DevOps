@@ -3,11 +3,14 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger CD on merge to main
+      - main
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,18 +36,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Audit npm dependencies
-        run: npm audit --audit-level=moderate || true
+      - name: Run npm audit
+        run: cd backend && npm audit --audit-level=moderate || true
 
       - name: Trivy image scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ghcr.io/your-username/taskflow:latest
+          image-ref: ghcr.io/rosine22/taskflow-backend:latest
 
   docker-build-push:
     needs: security-scanning
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -53,16 +59,17 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/your-username/taskflow:latest .
+        run: docker build -t ghcr.io/rosine22/taskflow-backend:latest ./backend
 
       - name: Push Docker image
-        run: docker push ghcr.io/your-username/taskflow:latest
+        run: docker push ghcr.io/rosine22/taskflow-backend:latest
 
   deploy:
     needs: docker-build-push
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Production
-        run: |
-          # Example: Trigger Azure CLI, Render CLI, or custom script
-          ./scripts/deploy.sh
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Azure App Service using Azure CLI
+        run: bash ./scripts/deploy.sh
