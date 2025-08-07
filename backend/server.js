@@ -3,7 +3,7 @@ import connectDB from './config/db.js';
 import dotenv from 'dotenv';
 import logger from './utils/logger';
 
-logger.info('Server started successfully');
+logger.info('Server started successfully now ');
 logger.error('An error occurred during startup');
 
 
