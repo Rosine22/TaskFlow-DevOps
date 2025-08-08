@@ -11,20 +11,23 @@ jobs:
     defaults:
       run:
         working-directory: backend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run tests
-        run: npm test
+        run: |
+          echo "Running tests..."
+          npm test || { echo "Tests failed!"; exit 1; }
 
       - name: Run ESLint
         run: npm run lint
@@ -32,14 +35,12 @@ jobs:
   security-scanning:
     needs: build-and-test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run npm audit
-        run: npm audit --audit-level=moderate || true
-
-      - name: Trivy image scan
+      - name: Install Trivy
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/rosine22/taskflow-backend:latest
@@ -49,9 +50,15 @@ jobs:
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
+      - name: Run npm audit
+        run: |
+          cd backend
+          npm audit --audit-level=moderate || true
+
   docker-build-push:
     needs: security-scanning
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -72,6 +79,7 @@ jobs:
   deploy:
     needs: docker-build-push
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
