@@ -139,3 +139,4 @@ Once deployed, you’ll receive a public URL for the frontend from Azure. You ca
 
 ✅ Cloud app behaves like local version
 
+Video Demo: https://www.youtube.com/watch?v=ovVLJ6KF0aM
