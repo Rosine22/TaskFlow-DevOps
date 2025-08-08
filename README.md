@@ -6,6 +6,7 @@ This README documents the full project setup including folder structure, local d
 
 ---
 
+## DEMO Video: https://youtu.be/ovVLJ6KF0aM 
 ## 📦 Current Project Status
 
 > The project is in its **final phase**. The following have been completed:
